@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layout/header.ejs'); -%>
+        <title>Đơn đặt hàng</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <%- include('../layout/navbarServer.ejs'); -%>
+        <div class="container">
+            <h1>Đơn hàng chờ sử lý</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ngày mua</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Số điện thoại</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dùng vòng lặp để hiển thị thông tin từng đơn hàng -->
+                    <% orders.forEach(function(order) { %>
+                        <tr>
+                            <td>
+                                <%= order.createdAt.getDate() %> / <%= order.createdAt.getMonth() %> / <%=
+                                            order.createdAt.getFullYear() %>
+                            </td>
+                            <td>
+                                <%= order.orderID %>
+                            </td>
+                            <td>
+                                <%= order.total %>
+                            </td>
+                            <td>
+                                <%= order.phone_number %>
+                            </td>
+                            <td>
+                                <%= order.status.name %>
+                            </td>
+                            <td><a href="/server/statusOrder?id=<%= order._id %>&status=1">Giao đơn</a></td>
+                            <td><a href="/server/statusOrder?id=<%= order._id %>&status=2">Xóa đơn</a></td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Liên kết với Bootstrap JavaScript -->
+        <%- include('../layout/script.ejs'); -%>
+
+</body>
+
+</html>

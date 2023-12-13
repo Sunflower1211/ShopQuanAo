@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../layout/header.ejs'); -%>
+        <title>Hóa đơn</title>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <%- include('../layout/navbarServer.ejs'); -%>
+        <div class="container">
+            <h1>Danh sách hóa đơn</h1>
+            <a href="/server/searchBill" class="btn btn-info">Tìm kiếm hóa đơn</a>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Ngày mua</th>
+                        <th>Mã hóa đơn</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Dùng vòng lặp để hiển thị thông tin từng đơn hàng -->
+                    <% orders.forEach(function(order) { %>
+                        <tr>
+                            <td>
+                                <%= order.createdAt.getDate() %> / <%= order.createdAt.getMonth() %> / <%=
+                                            order.createdAt.getFullYear() %>
+                            </td>
+                            <td>
+                                <%= order.orderID %>
+                            </td>
+                            <td>
+                                <%= order.total %>
+                            </td>
+                            <td>
+                                <%= order.status.name %>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Liên kết với Bootstrap JavaScript -->
+        <%- include('../layout/script.ejs'); -%>
+
+</body>
+
+</html>
